@@ -21,4 +21,7 @@ https://www.coursera.org/specializations/self-driving-cars
 ## 一些资源整理
 https://github.com/takeitallsource/awesome-autonomous-vehicles
 
+## 多传感器融合和目标跟踪
+A multi-sensor fusion system for moving object detection and tracking in urban driving environments
+
 
