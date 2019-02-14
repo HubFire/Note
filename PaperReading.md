@@ -4,3 +4,9 @@ https://arxiv.org/pdf/1604.07446.pdf
 
 ## 车道检测与跟踪
 Spatial As Deep: Spatial CNN for Traffic Scene Understanding" AAAI2018 https://github.com/XingangPan/SCNN
+https://github.com/amusi/awesome-lane-detection
+
+##  目标检测
+https://github.com/amusi/awesome-object-detection
+
+
