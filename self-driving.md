@@ -12,4 +12,13 @@ https://github.com/amusi/awesome-object-detection
 ## openpilot 
 https://github.com/commaai/openpilot
 
+## MIT课程
+MIT 6.S094: Deep Learning for Self-Driving Cars  https://selfdrivingcars.mit.edu/
+
+## 多伦多大学自动驾驶专项课程
+https://www.coursera.org/specializations/self-driving-cars
+
+## 一些资源整理
+https://github.com/takeitallsource/awesome-autonomous-vehicles
+
 
