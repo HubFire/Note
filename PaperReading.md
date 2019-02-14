@@ -9,4 +9,7 @@ https://github.com/amusi/awesome-lane-detection
 ##  目标检测
 https://github.com/amusi/awesome-object-detection
 
+## openpilot 
+https://github.com/commaai/openpilot
+
 
