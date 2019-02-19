@@ -8,3 +8,4 @@ tf.gradients(ys, xs,
              aggregation_method=None,
              stop_gradients=None)
 ```
+求ys对于xs的导数，grad_ys为权重，可以理解为链式求导的相乘。
