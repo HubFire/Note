@@ -1,8 +1,10 @@
 ## tf.gradients
-```tf.gradients(ys, xs, 
+```python
+tf.gradients(ys, xs, 
              grad_ys=None, 
              name='gradients',
              colocate_gradients_with_ops=False,
              gate_gradients=False,
              aggregation_method=None,
-             stop_gradients=None)```
+             stop_gradients=None)
+```
