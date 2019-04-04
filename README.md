@@ -22,5 +22,11 @@ Java+Scala
 论文阅读
 课程学习
 
+##  机器人领域
+handbook  of  robotics
+
+## 内功修炼
+凸优化理论
+
 
 
