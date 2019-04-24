@@ -27,6 +27,9 @@ handbook  of  robotics
 
 ## 内功修炼
 凸优化理论
+线性代数
+微积分
+概率论
 
 
 
