@@ -7,13 +7,11 @@ tensorflow中有一个计算梯度的函数tf.gradients(ys, xs)用来计算ys关
 ``` python
 import numpy  as  np 
 import tensorflow as tf  
-with tf.name_scope("share"):
-    w1 = tf.get_variable('w1',shape=[3])
-    w2 = tf.get_variable('w2',shape=[3])
-    with tf.name_scope("w3"):
-        w3 = tf.get_variable('w3',shape=[3])
-    with tf.name_scope("w4"):
-        w4 = tf.get_variable('w4',shape=[3])
+
+w1 = tf.get_variable('w1',shape=[3])
+w2 = tf.get_variable('w2',shape=[3])
+w3 = tf.get_variable('w3',shape=[3])
+w4 = tf.get_variable('w4',shape=[3])
 z =3*w1+2*w2
 z1 = tf.multiply(z,tf.transpose(w3))
 z2 = tf.multiply(z,tf.transpose(w4))
