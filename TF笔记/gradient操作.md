@@ -14,24 +14,15 @@ with tf.name_scope("share"):
         w3 = tf.get_variable('w3',shape=[3])
     with tf.name_scope("w4"):
         w4 = tf.get_variable('w4',shape=[3])
-
 z =3*w1+2*w2
-
-
 z1 = tf.multiply(z,tf.transpose(w3))
 z2 = tf.multiply(z,tf.transpose(w4))
 grad = tf.gradients([z1],[w1,w2,w3])
-
-
-print(w1.name)
-
 with tf.Session() as sess:
     tf.global_variables_initializer().run()
     print(sess.run(grad))
 ```
-*** 上述代码中如果tf.gradients([z1],[w1,w2,w3,w4]) 就会报错 ***
-
-## 
+** 上述代码中如果tf.gradients([z1],[w1,w2,w3,w4]) 就会报错 **
 
 
 
