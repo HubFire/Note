@@ -25,5 +25,20 @@ with tf.Session() as sess:
 **上述代码中如果tf.gradients([z1],[w1,w2,w3,w4]) 就会报错**
 
 
+## tf.gradients的grad_ys参数
+```python
+tf.gradients(ys, xs, 
+             grad_ys=None, 
+             name='gradients',
+             colocate_gradients_with_ops=False,
+             gate_gradients=False,
+             aggregation_method=None,
+             stop_gradients=None)
+```
+求ys对于xs的导数，grad_ys为权重，可以理解为链式求导的相乘。
+
+https://github.com/xitu/tensorflow-docs/wiki/%E6%8E%A8%E8%8D%90%E5%AD%A6%E4%B9%A0%E9%A1%BA%E5%BA%8F
+
+
 
 
