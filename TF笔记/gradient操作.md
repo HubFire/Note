@@ -22,7 +22,7 @@ with tf.Session() as sess:
     tf.global_variables_initializer().run()
     print(sess.run(grad))
 ```
-** 上述代码中如果tf.gradients([z1],[w1,w2,w3,w4]) 就会报错 **
+**上述代码中如果tf.gradients([z1],[w1,w2,w3,w4]) 就会报错**
 
 
 
