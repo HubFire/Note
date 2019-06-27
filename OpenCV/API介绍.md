@@ -127,4 +127,6 @@ Mat grayscale(image.size(), CV_MAKETYPE(image.depth(), 1)); // 生成1通道，�
 * Linear algebra functions and most of the machine learning algorithms work with floating-point arrays only.
 * Basic functions, such as cv::add, support all types.
 * Color space conversion functions support 8-bit unsigned, 16-bit unsigned, and 32-bit floating-point types.
+##  InputArray/OutputArray
+https://www.cnblogs.com/freshmen/p/4534966.html
 
