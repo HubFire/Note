@@ -86,5 +86,41 @@ int main(int, char**)
 ```
 上面程序中frame的空间由操作符>> 分配，cap知道视频帧的分辨率以及通道数。edges的内存由cvtColor函数分配，分辨率与输入的frame一样，COLOR_BGR2GRAY决定了edges为灰度图，通道为1。frame和edges的内存在循环的第一次进行分配，之后都是同一内存区域。只有当视频的分辨率改变时候才会释放内存进行重新分配。
 实现该功能主要是大多数函数都调用了Mat::create函数对输出数组进行内存分配。少数的函数例外，需要额外的处理（如 cv::mixChannels, cv::RNG::fill）
+## Saturation Arithmetics
+OpenCV中图像的像素通常是8位或16位编码的，因此能取得值有限。但是在做某些处理（如色彩空间转换、亮度/对比度调整、锐化、复杂插值(双立方、Lanczos)）可能会生成范围外的值，如果只存储结果的最低 8 (16) 位,则会导致视觉伪影,并可能影响进一步的图像分析。此时OpenCV会将操作结果r用0～255之件最接近r的值替代：
+```C++
+I(x,y)=min(max(round(r),0),255)
+```
+与此类似的，8位有符号，16位有符号或无符号也会做saturate处理（32位的integer不会saturate）
+```C++
+I.at<uchar>(y, x) = saturate_cast<uchar>(r);
+```
+## Fixed Pixel Types. Limited Use of Templates
+有限的使用模板：目前的OpenCV基于模板实现运行时的多态。但是由于以下原因，使用的较少：
+* 大量使用模板可能会增加编译时间和代码大小
+* 使用模板时无法分离接口和实现,对于单个算法有几千行代码的视觉库不好
+* 其他语言（Python Java Matlab）不支持模板或者支持有限
 
+有限的数据类型，数组元素需要是下列类型之一：
+* 8-bit unsigned integer (uchar)
+* 8-bit signed integer (schar)
+* 16-bit unsigned integer (ushort)
+* 16-bit signed integer (short)
+* 32-bit signed integer (int)
+* 32-bit floating-point number (float)
+* 64-bit floating-point number (double)
+OpenCV 数组里的所有元素需要是同一类型，目前最多支持的通道数为512，由常量CV_CN_MAX定义
+基本的数据类型枚举
+```C++
+enum { CV_8U=0, CV_8S=1, CV_16U=2, CV_16S=3, CV_32S=4, CV_32F=5, CV_64F=6 };
+```
+CV_8UC1 ... CV_64FC4 通道数常量（通道数从1到4）
+CV_8UC(n) ... CV_64FC(n) or CV_MAKETYPE(CV_8U, n) ... CV_MAKETYPE(CV_64F, n)超过4或者在运行时不知道时候
+例如：
+```C++
+Mat mtx(3, 3, CV_32F); // 3*3的浮点数矩阵
+Mat cmtx(10, 1, CV_64FC2); // 10*1的Double数组，两通道
+Mat img(Size(1920, 1080), CV_8UC3); // 1080行，1920列3通道无符号8位
+Mat grayscale(image.size(), CV_MAKETYPE(image.depth(), 1)); // 生成1通道，和image大小一样的矩阵                                                       
+```
 
