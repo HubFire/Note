@@ -1,3 +1,4 @@
+OpenCV 官方文档：https://docs.opencv.org/3.4.6/d1/dfb
 ## OpenCV主要的模块架构如下
 - core :核心模块，包含基本的数据结构，如多维矩阵，以及其他模块用到的基础函数
 - imgproc: 图像处理相关的，包含线性、非线性滤波，几何变换(缩放、仿射、透视、重投影),颜色空间变换，直方图等。
@@ -29,3 +30,33 @@ randu(a, Scalar::all(1), Scalar::all(std::rand()));
 cv::log(a, a);
 a /= std::log(2.);
 ```
+### Automatic Memory Management
+*** OpenCV自动管理内存 ***
+* std::vector, cv::Mat以及其他用到的数据结构都有析构函数，在必要的时候会自动释放内存。同时，OpenCV 也考虑到数据共享，每个数据缓冲区都有对应的引用计数器，复制的时候引用计数器增加，并没有实际的拷贝数据区。只有当引用计数器减到０时才会释放内存。
+* 如果需要深拷贝数据，Mat提供了Clone函数
+```C++
+// 创建一个８Ｍb的大矩阵
+Mat A(1000, 1000, CV_64F);
+// 为该矩阵创建一个新的引用
+// 该操作是即时的，不会分配新的内存，之前分配的内存引用计数会加１
+Mat B = A;
+// create another header for the 3-rd row of A; no data is copied either
+Mat C = B.row(3);
+// now create a separate copy of the matrix
+Mat D = B.clone();
+// copy the 5-th row of B to C, that is, copy the 5-th row of A
+// to the 3-rd row of A.
+B.row(5).copyTo(C);
+// now let A and D share the data; after that the modified version
+// of A is still referenced by B and C.
+A = D;
+// now make B an empty matrix (which references no memory buffers),
+// but the modified version of A will still be referenced by C,
+// despite that C is just a single row of the original A
+B.release();
+// finally, make a full copy of C. As a result, the big modified
+// matrix will be deallocated, since it is not referenced by anyone
+C = C.clone();
+```
+
+
