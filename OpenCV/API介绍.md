@@ -31,7 +31,7 @@ cv::log(a, a);
 a /= std::log(2.);
 ```
 ### Automatic Memory Management
-*** OpenCV自动管理内存 ***
+OpenCV自动管理内存
 * std::vector, cv::Mat以及其他用到的数据结构都有析构函数，在必要的时候会自动释放内存。同时，OpenCV 也考虑到数据共享，每个数据缓冲区都有对应的引用计数器，复制的时候引用计数器增加，并没有实际的拷贝数据区。只有当引用计数器减到０时才会释放内存。
 * 如果需要深拷贝数据，Mat提供了Clone函数
 ```C++
@@ -40,12 +40,11 @@ Mat A(1000, 1000, CV_64F);
 // 为该矩阵创建一个新的引用
 // 该操作是即时的，不会分配新的内存，之前分配的内存引用计数会加１
 Mat B = A;
-// create another header for the 3-rd row of A; no data is copied either
+// 为矩阵的第３行创建新的引用，依然没有数据拷贝
 Mat C = B.row(3);
-// now create a separate copy of the matrix
+// 创建该矩阵的独立副本
 Mat D = B.clone();
-// copy the 5-th row of B to C, that is, copy the 5-th row of A
-// to the 3-rd row of A.
+// 将Ｂ的第五行复制到Ｃ，相当于Ａ的第５行复制到Ａ的第三行
 B.row(5).copyTo(C);
 // now let A and D share the data; after that the modified version
 // of A is still referenced by B and C.
