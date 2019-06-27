@@ -60,5 +60,31 @@ T* ptr = new T(...);
 // 智能指针，封装了一个指向T类型实例的指针和一个引用计数器
 Ptr<T> ptr(new T(...));  或  Ptr<T> ptr = makePtr<T>(...);
 ```
+## Automatic Allocation of the Output Data
+*  OpenCV不仅自动释放内存，而且在大多数时候自动为函数的输出参数分配内存空间。如果一个函数有一个或多个输入Mat，有输出的矩阵的时候，输出数组的空间会被自动分配，大小和数据类型由输入的类型决定
+```C++
+#include "opencv2/imgproc.hpp"
+#include "opencv2/highgui.hpp"
+using namespace cv;
+int main(int, char**)
+{
+    VideoCapture cap(0);
+    if(!cap.isOpened()) return -1;
+    Mat frame, edges;
+    namedWindow("edges", WINDOW_AUTOSIZE);
+    for(;;)
+    {
+        cap >> frame;
+        cvtColor(frame, edges, COLOR_BGR2GRAY);
+        GaussianBlur(edges, edges, Size(7,7), 1.5, 1.5);
+        Canny(edges, edges, 0, 30, 3);
+        imshow("edges", edges);
+        if(waitKey(30) >= 0) break;
+    }
+    return 0;
+}
+```
+上面程序中frame的空间由操作符>> 分配，cap知道视频帧的分辨率以及通道数。edges的内存由cvtColor函数分配，分辨率与输入的frame一样，COLOR_BGR2GRAY决定了edges为灰度图，通道为1。frame和edges的内存在循环的第一次进行分配，之后都是同一内存区域。只有当视频的分辨率改变时候才会释放内存进行重新分配。
+实现该功能主要是大多数函数都调用了Mat::create函数对输出数组进行内存分配。少数的函数例外，需要额外的处理（如 cv::mixChannels, cv::RNG::fill）
 
 
