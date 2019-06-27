@@ -11,3 +11,14 @@
 
 ## API相关概念
 ### cv Namespace
+所有的opencv类和函数都在cv的命名空间下,因此使用的时候需要包含cv的命名空间
+```C++
+#include "opencv2/core.hpp"
+cv::Mat H = cv::findHomography(points1, points2, cv::RANSAC, 5);
+```
+或者:
+```C++
+#include "opencv2/core.hpp"
+using namespace cv;
+Mat H = findHomography(points1, points2, RANSAC, 5 );
+```
