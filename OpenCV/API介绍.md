@@ -123,4 +123,8 @@ Mat cmtx(10, 1, CV_64FC2); // 10*1的Double数组，两通道
 Mat img(Size(1920, 1080), CV_8UC3); // 1080行，1920列3通道无符号8位
 Mat grayscale(image.size(), CV_MAKETYPE(image.depth(), 1)); // 生成1通道，和image大小一样的矩阵                                                       
 ```
+* The face detection algorithm only works with 8-bit grayscale or color images.
+* Linear algebra functions and most of the machine learning algorithms work with floating-point arrays only.
+* Basic functions, such as cv::add, support all types.
+* Color space conversion functions support 8-bit unsigned, 16-bit unsigned, and 32-bit floating-point types.
 
