@@ -48,16 +48,17 @@ Mat D = B.clone();
 B.row(5).copyTo(C);
 // 将Ａ指向新的矩阵，Ａ和Ｄ的数据是新分配的未更改矩阵，Ｂ和Ｃ依然指向之前Ａ修改过的矩阵
 A = D;
-// now make B an empty matrix (which references no memory buffers),
-// but the modified version of A will still be referenced by C,
-// despite that C is just a single row of the original A
-// 
 // 使Ｂ成为空矩阵，实际上只是解除Ｂ的指向内存，因为Ｃ还在引用原来的内存区域，所以存储还不会释放
 B.release();
-// finally, make a full copy of C. As a result, the big modified
-// matrix will be deallocated, since it is not referenced by anyone
-// 将Ｃ的引用指向新的独立复制的矩阵，此时将释放最开始修改过的A的内存区域
+// 将Ｃ的引用指向新的独立复制的矩阵，此时将释放最开始修改过的A的内存区域，因为它的引用计数为0
 C = C.clone();
+```
+* 对于Mat或其他的简单数据结构可以使用上边的简单方法管理内存，对于高级类甚至用户自定义的类就需要使用智能指针。 OpenCVC提供智能指针模板类cv::Ptr 类似于C++ 11 里的std::shared_ptr，使用方法如下：
+```C++
+// 普通的指针
+T* ptr = new T(...);
+// 智能指针
+Ptr<T> ptr(new T(...));  或  Ptr<T> ptr = makePtr<T>(...);
 ```
 
 
