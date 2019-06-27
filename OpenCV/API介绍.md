@@ -22,3 +22,10 @@ cv::Mat H = cv::findHomography(points1, points2, cv::RANSAC, 5);
 using namespace cv;
 Mat H = findHomography(points1, points2, RANSAC, 5 );
 ```
+opencv中有些命名可能会与STL或其他库的命名冲突，因此在使用它们的时候显示的指定命名空间来解决冲突
+```
+Mat a(100, 100, CV_32F);
+randu(a, Scalar::all(1), Scalar::all(std::rand()));
+cv::log(a, a);
+a /= std::log(2.);
+```
