@@ -123,10 +123,27 @@ Mat cmtx(10, 1, CV_64FC2); // 10*1的Double数组，两通道
 Mat img(Size(1920, 1080), CV_8UC3); // 1080行，1920列3通道无符号8位
 Mat grayscale(image.size(), CV_MAKETYPE(image.depth(), 1)); // 生成1通道，和image大小一样的矩阵                                                       
 ```
-* The face detection algorithm only works with 8-bit grayscale or color images.
-* Linear algebra functions and most of the machine learning algorithms work with floating-point arrays only.
-* Basic functions, such as cv::add, support all types.
-* Color space conversion functions support 8-bit unsigned, 16-bit unsigned, and 32-bit floating-point types.
+* 人脸检测算法只适用于8位灰度图和彩图
+* 线性代数函数和大多数机器学习函数都是浮点数
+* 基本的函数，比如cv::add支持所有的类型
+* 颜色空间转换支持8位无符号，16位无符号以及32位浮点
 ##  InputArray/OutputArray
 https://www.cnblogs.com/freshmen/p/4534966.html
-
+InputArray/OutputArray是两个接口类，这个类只能作为函数的形参参数使用，不要试图声明一个InputArray类型的变量。InputArray这个接口类可以是Mat、Mat_<T>、Mat_<T, m, n>、vector<T>、vector<vector<T>>、vector<Mat>。如果在你自己编写的函数中形参也想用InputArray，可以传递多类型的参数，在函数的内部可以使用_InputArray：：getMat（）函数将传入的参数转换为Mat的结构，方便你函数内的操作；必要的时候，可能还需要_InputArray：：kind（）用来区分Mat结构或者vector<>结构，但通常是不需要的。例如：
+```C++
+    void myAffineTransform(InputArray _src, OutputArray _dst, InputArray _m)  
+{  
+  
+    Mat src = _src.getMat(), m = _m.getMat();  
+    CV_Assert( src.type() == CV_32FC2 && m.type() == CV_32F && m.size() == Size(3, 2) );  
+    _dst.create(src.size(), src.type());  
+    Mat dst = _dst.getMat();  
+    for( int i = 0; i < src.rows; i++ )  
+        for( int j = 0; j < src.cols; j++ )  
+        {  
+            Point2f pt = src.at<Point2f>(i, j);  
+            dst.at<Point2f>(i, j) = Point2f(m.at<float>(0, 0) * pt.x +  m.at<float>(0, 1) *   pt.y + m.at<float>(0, 2);  
+        }  
+}
+```
+    
