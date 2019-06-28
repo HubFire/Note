@@ -127,11 +127,10 @@ Mat grayscale(image.size(), CV_MAKETYPE(image.depth(), 1)); // 生成1通道，�
 * 线性代数函数和大多数机器学习函数都是浮点数
 * 基本的函数，比如cv::add支持所有的类型
 * 颜色空间转换支持8位无符号，16位无符号以及32位浮点
-##  InputArray/OutputArray
-https://www.cnblogs.com/freshmen/p/4534966.html
-InputArray/OutputArray是两个接口类，这个类只能作为函数的形参参数使用，不要试图声明一个InputArray类型的变量。InputArray这个接口类可以是Mat、Mat_<T>、Mat_<T, m, n>、vector<T>、vector<vector<T>>、vector<Mat>。如果在你自己编写的函数中形参也想用InputArray，可以传递多类型的参数，在函数的内部可以使用_InputArray：：getMat（）函数将传入的参数转换为Mat的结构，方便你函数内的操作；必要的时候，可能还需要_InputArray：：kind（）用来区分Mat结构或者vector<>结构，但通常是不需要的。例如：
+##   InputArray/OutputArray
+InputArray/OutputArray是两个接口类，这个类只能作为函数的形参参数使用，不要试图声明一个InputArray类型的变量。InputArray这个接口类可以是Mat、Mat_<T>、Mat_<T, m, n>、vector<T>、vector<vector<T>>、vector<Mat>。如果在你自己编写的函数中形参也想用InputArray，可以传递多类型的参数，在函数的内部可以使用_InputArray：：getMat（）函数将传入的参数转换为Mat的结构，方便你函数内的操作；必要的时候，可能还需要_InputArray：：kind（）用来区分Mat结构或者vector<>结构，但通常是不需要的。例如
 ```C++
-    void myAffineTransform(InputArray _src, OutputArray _dst, InputArray _m)  
+void myAffineTransform(InputArray _src, OutputArray _dst, InputArray _m)  
 {  
   
     Mat src = _src.getMat(), m = _m.getMat();  
