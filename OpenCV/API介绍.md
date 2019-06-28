@@ -145,4 +145,19 @@ void myAffineTransform(InputArray _src, OutputArray _dst, InputArray _m)
         }  
 }
 ```
+## OpenCV异常处理
+Opencv中使用 cv::Exception（继承自std::exception）来捕获异常。可以通过 CV_Error(errcode, description)， CV_Error_(errcode, (printf-spec, printf-args))， CV_Assert(condition)，CV_DbgAssert(condition) 等方式抛出异常。用户只需要在必要时使用try-catch处理异常即可。
+```C++
+try
+{
+    ... // call OpenCV
+}
+catch (const cv::Exception& e)
+{
+    const char* err_msg = e.what();
+    std::cout << "exception caught: " << err_msg << std::endl;
+}
+```
+##  OpenCV多线程
+OpenCV中的引用计数器是原子操作，因此是线程安全的
     
