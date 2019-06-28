@@ -34,7 +34,7 @@ PROJECT(${PROJECT_NAME})
 # find_package( OpenCV 3.4.6 REQUIRED )
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-add_executable( DisplayImage DisplayImage.cpp )
+add_executable( DisplayImage src/DisplayImage.cpp )
 target_link_libraries( DisplayImage ${OpenCV_LIBS} )
 ```
 然后就可以执行cmake，make编译程序了
