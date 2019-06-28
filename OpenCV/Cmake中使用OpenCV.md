@@ -38,3 +38,6 @@ add_executable( DisplayImage src/DisplayImage.cpp )
 target_link_libraries( DisplayImage ${OpenCV_LIBS} )
 ```
 然后就可以执行cmake，make编译程序了
+* IMREAD_UNCHANGED (<0) 读取图片不改变通道,若果有alpha的话也会加载
+* IMREAD_GRAYSCALE ( 0) 读取灰度图
+* IMREAD_COLOR (>0) 读取RGB图
