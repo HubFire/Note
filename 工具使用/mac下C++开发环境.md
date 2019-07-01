@@ -9,10 +9,10 @@
     * 下载并安装Cmake，https://cmake.org/download/
     * 在系统PATH中增加 export PATH="/Applications/CMake.app/Contents/bin":"$PATH"
 此时Mac 下C++开发环境已经安装好了<br>
-命令行下验证各软件：
-* cmake --version
-* make -v
-* gcc/g++ -v
-* lldb -v
+* 命令行下验证各软件：
+    * cmake --version
+    * make -v
+    * gcc/g++ -v
+    * lldb -v
     
     
