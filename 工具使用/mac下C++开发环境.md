@@ -4,7 +4,7 @@
     * 安装Command Line Tools，执行xcode-select --install 
 * 安装VScode
     * 下载并安装VScode
-    * VS code安装C++插件  C/C++  C++ intellisence  C++ Clang
+    * VS code安装C++插件  C/C++ , C++ intellisence , C++ Clang ,Cmake
 * 安装CMake
     * 下载并安装Cmake，https://cmake.org/download/
     * 在系统PATH中增加 export PATH="/Applications/CMake.app/Contents/bin":"$PATH" <br>
