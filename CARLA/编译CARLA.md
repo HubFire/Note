@@ -1,5 +1,5 @@
 ## 系统依赖软件安装
-为了加快安装速度，将国内apt源换回ubuntu官方默认源，同时删掉sougoupinyin，teamviewer,vscode等源
+为了加快安装速度，使用科学上网。然后将国内apt源换回ubuntu官方默认源，同时删掉sougoupinyin，teamviewer,vscode等源
 ```shell
 sudo apt-get update
 sudo apt-get install wget software-properties-common
