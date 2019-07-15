@@ -13,3 +13,5 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/f
 conda config --set show_channel_urls yes
 * 显示镜像 conda config --show
 * 删除镜像 conda config --remove channels https://pypi.doubanio.com/simple/
+
+Anaconda 5.2版本对应的是python3.6 ,以后的版本都是3.7了
