@@ -2,3 +2,4 @@
 - launch文件中修改program为可执行文件路径
 - 需要先make编译出可执行文件
 - make时候要打开-g选项 cmakeList中：add_definitions("-Wall -g")
+- tasks.json里定义任务，在launch中的preLaunchTask进行配置
