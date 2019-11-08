@@ -36,3 +36,35 @@
     ]
 }
 ```
+## task.json
+```json
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "g++-5 build active file",
+            "command": "make",
+            // "args": [
+            //     "-g",
+            //     "${file}",
+            //     "-o",
+            //     "${fileDirname}/${fileBasenameNoExtension}"
+            // ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
+```
+## CMakeLists.txt
+cmake_minimum_required(VERSION 2.8)
+project(bspline)
+
+add_compile_options(-std=c++11)
+add_definitions("-Wall -g")
+#add_definitions("-Wall -g")
+find_package(Eigen3)
+INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIR})
+add_executable(bspline src/main.cc src/bspline.cc)
